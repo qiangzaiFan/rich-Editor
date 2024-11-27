@@ -6,7 +6,7 @@
     </div>
     <el-button @click="saveDate">保存</el-button>
     <el-button @click="exportWord">导出</el-button>
-  </div>
+  </div>       
 </template>
 <script>
 import DecoupledEditor from "@ckeditor/ckeditor5-build-decoupled-document";
