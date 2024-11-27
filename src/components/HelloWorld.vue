@@ -4,8 +4,8 @@
     <div ref="editor" id="editor">
       <p>This is the initial editor content.</p>
     </div>
-    <el-button @click="saveDate">保存</el-button>
-    <el-button @click="exportWord">导出</el-button>
+    <!-- <el-button @click="saveDate">保存</el-button>
+    <el-button @click="exportWord">导出</el-button> -->
   </div>       
 </template>
 <script>
@@ -30,22 +30,16 @@ export default {
         language: "zh-cn", // 中文
         toolbar: {
           items: [
-            "heading",
-            "|",
-            "fontfamily",
             "fontsize",
-            "|",
-            "alignment",
-            "|",
-            "fontColor",
-            "fontBackgroundColor",
             "|",
             "bold",
             "italic",
             "strikethrough",
             "underline",
             "|",
-            "link",
+            "fontColor",
+            "|",
+            "alignment",
             "|",
             "outdent",
             "indent",
@@ -56,13 +50,18 @@ export default {
             "insertTable",
             "|",
             "uploadImage",
-            // "blockQuote",
+            "|",
+            "link",
             "|",
             "undo",
             "redo",
           ],
+        
           shouldNotGroupWhenFull: true,
         },
+          fontSize: {
+            options: [12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36, 38],
+          },
         // plugins: [ Table, TableToolbar, TableProperties, TableCellProperties],
         table: {
           contentToolbar: [ 'tableColumn', 'tableRow', 'mergeTableCells', ]
