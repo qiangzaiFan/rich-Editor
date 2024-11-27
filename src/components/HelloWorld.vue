@@ -9,6 +9,7 @@
   </div>       
 </template>
 <script>
+import { UploadAdapter } from "../utils/ckeditor";
 import DecoupledEditor from "@ckeditor/ckeditor5-build-decoupled-document";
 import "@ckeditor/ckeditor5-build-decoupled-document/build/translations/zh-cn.js";
 
@@ -62,12 +63,30 @@ export default {
           fontSize: {
             options: [12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36, 38],
           },
+          // 配置图片功能栏
+      image: {
+        toolbar: [
+          "imageTextAlternative",
+          "imageStyle:full",
+          "imageStyle:side",
+          "imageStyle:alignLeft",
+          "imageStyle:alignCenter",
+          "imageStyle:alignRight",
+        ],
+        styles: ["full", "side", "alignLeft", "alignCenter", "alignRight"],
+      },
         // plugins: [ Table, TableToolbar, TableProperties, TableCellProperties],
         table: {
           contentToolbar: [ 'tableColumn', 'tableRow', 'mergeTableCells', ]
         }
       })
         .then((editor) => {
+        // 绑定图片上传插件
+        editor.plugins.get("FileRepository").createUploadAdapter = (loader) => {
+          return new UploadAdapter(loader)
+        };
+          
+          // 定义工具栏
           const toolbarContainer = document.querySelector("#toolbar-container");
           toolbarContainer.appendChild(editor.ui.view.toolbar.element);
           editor.setData(this.editData);
