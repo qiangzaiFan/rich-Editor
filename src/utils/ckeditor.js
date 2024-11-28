@@ -1,20 +1,24 @@
-// 第三步：声明上传图片的构造函数
-class UploadAdapter {
-    constructor(loader) {
-      this.loader = loader;
-    }
-  
-    upload() {
-      return new Promise(resolve => {
-        let file = this.loader.file;
-        console.log('----this.loader,',this.loader);
-        let url = window.URL.createObjectURL(new Blob(file))
-        
-        resolve({
-          default: url,
-        });
-      });
-    }
+export default class uploadImageAdapter {
+  constructor(loader) {
+    this.loader = loader
   }
-  // 第四步：导出  UploadAdapter
-  export {  UploadAdapter }
+
+  async upload() {
+    //获取到用户上传的文件
+    const image = await this.loader.file
+    const formData = new FormData()
+
+    formData.append('file', image)
+    /***
+     * axios实现上传逻辑
+     *
+     */
+
+    //返回的结果格式化一下,把url传到下面的json中
+    let resultJson = { uploaded: 1, url: '/' }
+
+    return resultJson
+  }
+
+  abort() {}
+}
